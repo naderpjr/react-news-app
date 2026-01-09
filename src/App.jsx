@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import CategorySelector from "./components/CategorySelector";
 
 function App() {
   const [news, setNews] = useState([]);
@@ -35,13 +36,37 @@ function App() {
 
   }
 
-  // useEffect(() => {
-  //   fetchNews();
-  // }, [category, currentPage]);
+  useEffect(() => {
+    fetchNews();
+  }, [category, currentPage]);
+
+
+  const handleCategoryChange = (newCategory) => {
+    setCategory(newCategory);
+    setCurrentPage(1);
+  }
 
   return (
-    <div>
-      React News App
+    <div className="min-h-screen bg-base-200">
+      <header className="bg-primary text-primary-content p-4">
+        <div className="container mx-auto">
+          <h1 className="text-3xl font-bold">News App</h1>
+        </div>
+      </header>
+      <main className="container mx-auto p-4">
+        <div className="mb-6">
+          <CategorySelector category={category} onCategoryChange={handleCategoryChange} />
+        </div>
+        <div className="mb-6 text-center">
+          <p className="text-lg">Total results: {totalResults}</p>
+        </div>
+        {loading && (
+          <div className="flex justify-center">
+            <span className="loading loading-spinner loading-lg"></span>
+          </div>
+        )}
+        {error && <div className="alert alert-error">{error}</div>}
+      </main>
     </div>
   )
 }
