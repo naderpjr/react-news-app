@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import CategorySelector from "./components/CategorySelector";
 import NewsList from "./components/NewsList";
+import Pagination from "./components/Pagination";
 
 function App() {
   const [news, setNews] = useState([]);
@@ -47,6 +48,14 @@ function App() {
     setCurrentPage(1);
   }
 
+  const handlePrev = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  }
+
+  const handleNext = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  }
+
   return (
     <div className="min-h-screen bg-base-200">
       <header className="bg-primary text-primary-content p-4">
@@ -70,6 +79,11 @@ function App() {
         {!loading && !error && (
           <>
             <NewsList articles={news} />
+            {totalPages > 1 && (
+              <div>
+                <Pagination currentPage={currentPage} totalPages={totalPages} onPrev={handlePrev} onNext={handleNext} />
+              </div>
+            )}
           </>
         )}
       </main>
