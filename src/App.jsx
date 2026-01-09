@@ -58,10 +58,10 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-base-200">
-      <header className="bg-primary text-primary-content p-4">
-        <div className="container mx-auto">
-          <h1 className="text-3xl font-bold">News App</h1>
+    <div className="min-h-screen bg-white text-teal-700">
+      <header className="bg-white text-teal-700 p-4">
+        <div className="container mx-auto text-center">
+          <h1 className="text-1xl font-bold">News App by Monalux</h1>
         </div>
       </header>
       <main className="container mx-auto p-4">

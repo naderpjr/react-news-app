@@ -16,7 +16,7 @@ const CategorySelector = ({ category, onCategoryChange }) => {
         <div className='flex justify-center'>
             <div className='btn-group'>
                 {categories.map(cat => (
-                    <button onClick={() => onCategoryChange(cat.id)} className={`btn ${category === cat.id ? "btn-active" : ""}`} key={cat.id}>
+                    <button onClick={() => onCategoryChange(cat.id)} className={`btn bg-white text-teal-700 m-1 ${category === cat.id ? "btn-active" : ""}`} key={cat.id}>
                         {cat.name}
                     </button>
                 ))

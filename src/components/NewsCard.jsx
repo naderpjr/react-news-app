@@ -2,7 +2,7 @@ import React from 'react'
 
 const NewsCard = ({ articles }) => {
     return (
-        <div className='card bg-base-100 shadow-xl'>
+        <div className='card bg-white shadow-xl'>
             {articles.urlToImage && (
                 <figure>
                     <img src={articles.urlToImage} alt={articles.title} className='w-full h-48 object-cover' />
@@ -15,7 +15,7 @@ const NewsCard = ({ articles }) => {
                 )}
                 <p>{articles.description}</p>
                 <div className='card-actions justify-end mt-4'>
-                    <a href={articles.url} rel="noopener noreferrer" target='_blank' className='btn btn-primary'>
+                    <a href={articles.url} rel="noopener noreferrer" target='_blank' className='btn bg-teal-700 border-none outline-0'>
                         Read More
                     </a>
                 </div>
