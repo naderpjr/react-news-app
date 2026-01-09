@@ -32,7 +32,7 @@ function App() {
       setTotalResults(response.data.totalResults || 0);
       setTotalPages(Math.ceil((response.data.totalResults || 0) / PAGE_SIZE));
     } catch (err) {
-      setError("Failed to fetch news." + err);
+      setError("Free Plan of News Api limit." + " " + err);
     } finally {
       setLoading(false);
     }
