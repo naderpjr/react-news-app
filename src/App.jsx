@@ -1,35 +1,49 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [news, setNews] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [category, setCategory] = useState("general");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalResults, setTotalResults] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
+
+
+  const API_KEY = import.meta.env.VITE_NEWS_API_KEY;
+  const PAGE_SIZE = 20;
+
+  const fetchNews = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await axios.get(
+        `https://newsapi.org/v2/top-headlines?country=us&category=${category}&page=${currentPage}&pageSize=${PAGE_SIZE}&apiKey=${API_KEY}`
+      )
+      console.log(response);
+      const articles = response.data.articles || [];
+      setNews(articles);
+      setTotalResults(response.data.totalResults || 0);
+      setTotalPages(Math.ceil((response.data.totalResults || 0) / PAGE_SIZE));
+    } catch (err) {
+      setError("Failed to fetch news." + err);
+    } finally {
+      setLoading(false);
+    }
+
+  }
+
+  // useEffect(() => {
+  //   fetchNews();
+  // }, [category, currentPage]);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div>
+      React News App
+    </div>
   )
 }
 
-export default App
+export default App;
