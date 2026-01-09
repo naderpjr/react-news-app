@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import CategorySelector from "./components/CategorySelector";
+import NewsList from "./components/NewsList";
 
 function App() {
   const [news, setNews] = useState([]);
@@ -66,6 +67,11 @@ function App() {
           </div>
         )}
         {error && <div className="alert alert-error">{error}</div>}
+        {!loading && !error && (
+          <>
+            <NewsList articles={news} />
+          </>
+        )}
       </main>
     </div>
   )
